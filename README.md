@@ -2,61 +2,46 @@
 
 <div align="center">
   <img src="https://github.com/Dedsec-b/v6rge-releases-/releases/download/v0.1.0/icon.png" width="128" height="128" alt="V6rge Icon" />
-  <h3>Your Local AI Operating System</h3>
+  <h3>The All-In-One Offline AI Studio</h3>
+  <p><b>No Coding Required. No Cloud. 100% Local.</b></p>
 </div>
 
-V6rge is a powerful desktop application that puts state-of-the-art AI capabilities directly in your hands. It runs **100% locally** on your machine—no cloud subscriptions, no data privacy concerns.
+**V6rge** is a single app that gives you the power of a full AI research lab. Install, click, and create.
 
-## 🚀 Features
-- **OS Control:** Control your PC with natural language command-line agents.
-- **Vision:** Show the AI your screen or images and ask questions.
-- **Image Generation:** Create high-quality images with Flux.1.
-- **Video Generation:** Generate videos with HunyuanVideo.
-- **3D Creation:** Turn single images into manipulatable 3D models.
-- **Music & Audio:** Generate music (MusicGen) and clone voices (Chatterbox).
-- **Tools:** Remove backgrounds, upscale to 4K, and separate vocals/instrumentals.
-
----
-
-## 💻 System Requirements
-
-V6rge runs heavy AI models locally. Your hardware determines the speed and capability.
-
-### Minimum Requirements (Basic Usage)
-*Use for: Chat, Text-to-Speech, Basic Image Gen, System Control*
-- **OS:** Windows 10/11 (64-bit)
-- **RAM:** 16 GB
-- **GPU:** NVIDIA RTX 3060 (12GB VRAM) or equivalent
-- **Storage:** 20 GB free space (SSD recommended)
-
-### Recommended Requirements (Smooth Experience)
-*Use for: Fast Image Gen, Music Gen, 3D Models, 4K Upscaling*
-- **OS:** Windows 10/11 (64-bit)
-- **RAM:** 32 GB
-- **GPU:** NVIDIA RTX 3090 / 4070 Ti (16GB+ VRAM)
-- **Storage:** 50 GB free space (NVMe SSD)
-
-### "God Mode" Requirements (Video Generation)
-*Use for: HunyuanVideo, Large Model Training*
-- **RAM:** 64 GB System RAM
-- **GPU:** NVIDIA RTX 3090 / 4090 (24GB VRAM)
-- **Processor:** Modern 8-core CPU (Intel i7/i9 or AMD Ryzen 7/9)
+## ⚡ Capabilities
+*   💻 **OS Agent:** Controls your PC. Just type *"Organize my download folder"* or *"Find all PDFs"* and watch it happen.
+*   🎨 **Image Gen:** Generate studio-quality images (Flux.1).
+*   🎬 **Video Gen:** Create videos from text (HunyuanVideo).
+*   🧊 **3D Models:** Turn any image into a 3D object in seconds.
+*   🗣️ **Voice & Audio:** Clone voices and generate music.
+*   🛠️ **Tools:** 4K Upscaling, Background Removal, Vocal Separation.
 
 ---
 
-## 📦 Installation
-1. Download the latest `V6rge Setup.exe` from the [Releases Page](../../releases).
-2. Run the installer.
-3. **First Run:** The app will download necessary AI models automatically. This requires an internet connection and may take **10-30 minutes** depending on your speed.
+## 🖥️ System Requirements
+**Warning:** This runs *real* AI models on your hardware. It requires significant space and power.
 
-## 🔄 Updates
-V6rge updates automatically. Just check the app periodically; it will notify you when a new version is installed.
+### 💾 Storage (The Real Picture)
+**Total Space for "Full Suite": ~100 GB+**
+The app is small, but the brains (models) are huge.
+*   **Core App:** 2 GB
+*   **Image Models (Flux):** ~35 GB
+*   **Video Models:** ~25 GB
+*   **Text/Agent Models:** ~15 GB
+*   **3D/Audio Models:** ~10 GB
 
-## 🛡️ Privacy
-**V6rge is Offline-First.**
-- Your data stays on your drive.
-- No prompts or images are sent to our servers.
-- The "System Agent" only executes commands you approve.
+### ⚙️ Hardware Specs
+| Component | Minimum (Basic Usage) | Recommended (Smooth) | God Mode (Video/Training) |
+| :--- | :--- | :--- | :--- |
+| **GPU (NVIDIA)** | RTX 3060 (12GB) | **RTX 3090 / 4070 Ti (16GB+)** | RTX 4090 (24GB) |
+| **RAM** | 16 GB | **32 GB** | 64 GB |
+| **Disk** | HDD (Not Recommended) | **NVMe SSD** | NVMe SSD |
 
 ---
-*Built with ❤️ by the V6rge Team.*
+
+## 📦 How to Install
+1.  Download `V6rge Setup.exe` from **[Releases](../../releases)**.
+2.  Install & Run.
+3.  **Sit back:** The app will auto-download the models you need when you first use them.
+
+*Your Data, Your PC, Your Rules.*
