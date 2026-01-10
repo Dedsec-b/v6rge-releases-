@@ -1,7 +1,7 @@
 # V6rge AI Suite (Beta)
 
 <div align="center">
-  <img src="https://github.com/Dedsec-b/v6rge-releases-/releases/download/v0.1.0/icon.png" width="128" height="128" alt="V6rge Icon" />
+ 
   <h3>The All-In-One Offline AI Studio</h3>
   <p><b>No Coding Required. No Cloud. 100% Local.</b></p>
 </div>
