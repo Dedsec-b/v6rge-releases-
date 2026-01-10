@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.env
+*.spec
+*.log
+V6rge-win32-x64/

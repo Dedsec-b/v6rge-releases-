@@ -1,0 +1,63 @@
+{
+  "name": "v6rge-desktop",
+  "version": "0.1.1",
+  "description": "V6rge AI Suite - Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "V6rge Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dedsec-b/v6rge-releases-.git"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "electron-updater": "^6.7.3",
+    "node-fetch": "^2.7.0"
+  },
+  "build": {
+    "appId": "com.v6rge.desktop",
+    "productName": "V6rge",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Dedsec-b",
+        "repo": "v6rge-releases-"
+      }
+    ],
+    "directories": {
+      "output": "D:/V6rge_Builds/${version}"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "app/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": true
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "app/icon.icns"
+    },
+    "extraResources": [
+      {
+        "from": "backend/dist/v6rge_backend",
+        "to": "v6rge_backend",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ]
+  }
+}

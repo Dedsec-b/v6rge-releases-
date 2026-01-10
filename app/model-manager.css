@@ -1,0 +1,191 @@
+/* ========================================
+   MODEL MANAGER DASHBOARD
+   ======================================== */
+
+.model-manager {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.manager-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.manager-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.storage-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.model-category {
+    margin-bottom: 32px;
+}
+
+.category-header {
+    margin-bottom: 12px;
+}
+
+.category-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.model-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.model-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.model-item:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-focus);
+}
+
+.model-info {
+    flex: 1;
+}
+
+.model-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quality-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+}
+
+.quality-badge.best {
+    background: #22c55e20;
+    color: #22c55e;
+}
+
+.quality-badge.balanced {
+    background: #f59e0b20;
+    color: #f59e0b;
+}
+
+.quality-badge.fast {
+    background: #6366f120;
+    color: #818cf8;
+}
+
+.model-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.model-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.model-meta .warning {
+    color: #f59e0b;
+}
+
+.model-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.model-status {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.model-status[data-status="not-downloaded"] {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+.model-status[data-status="ready"] {
+    background: #22c55e20;
+    color: #22c55e;
+}
+
+.model-status[data-status="downloading"] {
+    background: #f59e0b20;
+    color: #f59e0b;
+}
+
+.btn-download {
+    padding: 6px 16px;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: var(--accent-hover);
+}
+
+.btn-download:disabled {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.btn-delete {
+    padding: 6px 12px;
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid #ef444440;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: #ef444420;
+    border-color: #ef4444;
+}
+
+/* Custom dropdown styles removed - now handled globally in styles.css */
