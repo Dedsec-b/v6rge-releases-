@@ -1,0 +1,68 @@
+{
+  "name": "v6rge-desktop",
+  "version": "0.1.5",
+  "description": "V6rge AI Suite - Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --config.directories.output=\"D:/V6rge_Builds/${version}\""
+  },
+  "author": "V6rge Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dedsec-b/v6rge-releases-.git"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "electron-updater": "^6.7.3",
+    "node-fetch": "^2.7.0"
+  },
+  "files": [
+    "**/*",
+    "!backend",
+    "!backend/dist",
+    "!backend/**/*"
+  ],
+  "build": {
+    "appId": "com.v6rge.desktop",
+    "productName": "V6rge",
+    "directories": {
+      "output": "D:/V6rge_Builds/${version}"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Dedsec-b",
+        "repo": "v6rge-releases-"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "app/icon.ico"
+    },
+    "compression": "store",
+    "nsis": {
+      "guid": "534ed3d9-0c6e-4734-9243-7f303798950d",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": true
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "app/icon.icns"
+    },
+    "extraResources": [
+      {
+        "from": "../backend.zip",
+        "to": "backend.zip"
+      }
+    ]
+  }
+}

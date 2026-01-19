@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V6rge Setup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0f;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            background: linear-gradient(45deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 14px;
+            color: #9ca3af;
+            margin: 0 0 32px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #1f2937;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #6366f1;
+            width: 30%;
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: indeterminate 1.5s infinite linear;
+        }
+
+        @keyframes indeterminate {
+            0% {
+                left: -30%;
+                width: 30%;
+            }
+
+            50% {
+                left: 20%;
+                width: 60%;
+            }
+
+            100% {
+                left: 100%;
+                width: 30%;
+            }
+        }
+
+        .status-text {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Using the app icon or a placeholder SVG -->
+        <img src="icon.png" class="logo" alt="V6rge Logo">
+        <h1>Setting Up V6rge</h1>
+        <p>Initializing AI Core components...</p>
+        <p style="font-size: 11px; opacity: 0.7; margin-top: -24px;">Extracting additional resources (800MB+). This may
+            take a few minutes.</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="status-text">This may take a moment...</div>
+    </div>
+</body>
+
+</html>

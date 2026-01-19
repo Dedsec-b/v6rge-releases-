@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V6rge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="model-manager.css">
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Toast Notifications -->
+    <script src="js/modules/toast.js"></script>
+</head>
+
+<body>
+    <!-- Update Modal -->
+    <div id="update-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-panel" style="max-width: 400px; text-align: center;">
+            <div class="modal-header">
+                <h3>Update Available 🚀</h3>
+            </div>
+            <div class="modal-body">
+                <p>A new version (<span id="update-version">v0.x.x</span>) is available!</p>
+                <p class="text-muted">Would you like to download and install it now?</p>
+            </div>
+            <div class="modal-footer" style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button id="btn-update-cancel" class="btn-secondary">Later</button>
+                <button id="btn-update-confirm" class="btn-primary">Update Now</button>
+            </div>
+        </div>
+    </div>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Collapse Toggle Button -->
+            <button class="collapse-toggle" id="collapse-toggle" title="Toggle Sidebar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="sidebar-header">
+                <span class="logo">V6rge</span>
+                <span class="version">v0.1</span>
+            </div>
+
+            <div class="sidebar-content">
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" data-view="dashboard">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" />
+                            <rect x="14" y="3" width="7" height="7" />
+                            <rect x="14" y="14" width="7" height="7" />
+                            <rect x="3" y="14" width="7" height="7" />
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="chat">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                        <span>Chat</span>
+                    </a>
+                </nav>
+
+                <div class="sidebar-section">
+                    <div class="section-label">Tools</div>
+                    <a href="#" class="nav-item" data-view="image-gen">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <path d="m21 15-5-5L5 21" />
+                        </svg>
+                        <span>Image Generation</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="music-gen">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 18V5l12-2v13" />
+                            <circle cx="6" cy="18" r="3" />
+                            <circle cx="18" cy="16" r="3" />
+                        </svg>
+                        <span>Music Generation</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="tts">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            <line x1="12" y1="19" x2="12" y2="23" />
+                            <line x1="8" y1="23" x2="16" y2="23" />
+                        </svg>
+                        <span>Text to Speech</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="3d-gen">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                            <line x1="12" y1="22.08" x2="12" y2="12" />
+                        </svg>
+                        <span>3D Generation</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="video-gen">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="2.18" />
+                            <line x1="7" y1="2" x2="7" y2="22" />
+                            <line x1="17" y1="2" x2="17" y2="22" />
+                            <line x1="2" y1="12" x2="22" y2="12" />
+                            <line x1="2" y1="7" x2="7" y2="7" />
+                            <line x1="2" y1="17" x2="7" y2="17" />
+                            <line x1="17" y1="17" x2="22" y2="17" />
+                            <line x1="17" y1="7" x2="22" y2="7" />
+                        </svg>
+                        <span>Video Generation</span>
+                    </a>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="section-label">Utilities</div>
+                    <a href="#" class="nav-item" data-view="upscale">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="15 3 21 3 21 9" />
+                            <polyline points="9 21 3 21 3 15" />
+                            <line x1="21" y1="3" x2="14" y2="10" />
+                            <line x1="3" y1="21" x2="10" y2="14" />
+                        </svg>
+                        <span>Image Upscaler</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="bg-remove">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="8" y1="12" x2="16" y2="12" />
+                        </svg>
+                        <span>Background Removal</span>
+                    </a>
+                    <a href="#" class="nav-item" data-view="vocal-sep">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                            <path d="M12 12v9" />
+                            <path d="m8 17 4 4 4-4" />
+                        </svg>
+                        <span>Vocal Separator</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item" data-view="settings">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item" data-view="feedback">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5">
+                        </path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                    </svg>
+                    <span>Provide Feedback</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <span class="breadcrumb">Dashboard</span>
+                </div>
+                <div class="header-right">
+                    <div class="gpu-status" id="gpu-status-display" style="display: none;">
+                        <span class="gpu-label">GPU</span>
+                        <span class="gpu-value" id="gpu-display-name"></span>
+                        <span class="gpu-vram" id="gpu-display-vram"></span>
+                    </div>
+
+                    <!-- Agent Mode Toggle -->
+
+                    <!-- Agent Mode Toggle -->
+                    <div class="agent-toggle-wrapper" style="margin-left: 20px; display: flex; align-items: center;"
+                        title="Enable Autonomous Agent Capabilities">
+                        <label class="switch"
+                            style="position: relative; display: inline-block; width: 40px; height: 20px;">
+                            <input type="checkbox" id="agent-mode-toggle">
+                            <span class="slider round"
+                                style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 20px;"></span>
+                        </label>
+                        <span class="toggle-label"
+                            style="margin-left:8px; font-weight:600; font-size:12px; color:var(--text-secondary); transition: color 0.3s; cursor:pointer;">AGENT
+                            MODE <span class="agent-icon" style="opacity:0.3; transition:opacity 0.3s;">⚡</span></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard View - Model Manager -->
+            <div class="view active" id="dashboard-view">
+                <!-- Cloud Mode Toggle -->
+                <div class="cloud-mode-card" id="cloud-mode-card">
+                    <div class="cloud-mode-header">
+                        <div class="cloud-mode-info">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+                            </svg>
+                            <div>
+                                <div class="cloud-mode-title">Cloud Mode</div>
+                                <div class="cloud-mode-desc">Use remote GPU server instead of local models</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="cloud-mode-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="cloud-url-section" id="cloud-url-section" style="display: none;">
+                        <input type="text" id="cloud-backend-url" placeholder="https://your-server.ngrok.io"
+                            class="cloud-url-input">
+                        <button id="cloud-connect-btn" class="btn-primary btn-sm">Connect</button>
+                        <span id="cloud-status" class="cloud-status"></span>
+                    </div>
+                </div>
+
+                <div class="model-manager">
+                    <div class="manager-header">
+                        <h2>Model Manager</h2>
+                        <div class="storage-info">
+                            <span id="total-downloaded">0 GB</span> / <span id="total-available">~407 GB</span>
+                            available
+                        </div>
+                    </div>
+
+                    <!-- Chat Models -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Chat Models</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="qwen-3b">
+                                <div class="model-info">
+                                    <div class="model-name">Qwen 7B (Quantized) <span class="quality-badge best"
+                                            style="background: rgba(16, 185, 129, 0.15); color: #10b981;">[Low End
+                                            PC]</span>
+                                    </div>
+                                    <div class="model-desc">Eco Mode. Basic intelligence designed for compatibility. Use
+                                        only if you don't have a GPU.
+                                    </div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 4.4 GB</span>
+                                        <span class="meta-item">🧠 RAM: 8GB+</span>
+                                        <span class="meta-item">⚡ VRAM: Low (2GB+)</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="qwen-3b">Download</button>
+                                </div>
+                            </div>
+                            <div class="model-item" data-model-id="qwen-72b">
+                                <div class="model-info">
+                                    <div class="model-name">Qwen 72B (GGUF) <span
+                                            class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">God-Tier. Unrivaled logic & coding capability. Matches
+                                        GPT-4.
+                                    </div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 44.2 GB</span>
+                                        <span class="meta-item">🧠 RAM: 48GB+</span>
+                                        <span class="meta-item warning">⚡ VRAM: High (24GB+)</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="qwen-72b">Download</button>
+                                </div>
+                            </div>
+
+                            <div class="model-item" data-model-id="qwen-32b">
+                                <div class="model-info">
+                                    <div class="model-name">Qwen 32B (GGUF) <span
+                                            class="quality-badge balanced">[BALANCED]</span></div>
+                                    <div class="model-desc">High-End. Significantly smarter than 7B. Best balance of
+                                        logic and speed.</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 18.5 GB</span>
+                                        <span class="meta-item">🧠 RAM: 24GB+</span>
+                                        <span class="meta-item">⚡ VRAM: Med (12GB+)</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="qwen-32b">Download</button>
+                                </div>
+                            </div>
+
+                            <div class="model-item" data-model-id="qwen-7b">
+                                <div class="model-info">
+                                    <div class="model-name">Qwen 7B Full <span class="quality-badge fast">[FAST]</span>
+                                    </div>
+                                    <div class="model-desc">Standard Tier. Fast and precise. Good for casual chat,
+                                        struggles with complex math.</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 14.2 GB</span>
+                                        <span class="meta-item">🧠 RAM: 16GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 8GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="qwen-7b">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vision Models -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Vision Models</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="qwen2-vl">
+                                <div class="model-info">
+                                    <div class="model-name">Qwen2-VL 7B <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Analyze and understand images</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 15.5 GB</span>
+                                        <span class="meta-item">🧠 RAM: 16GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 8GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="qwen2-vl">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Generation -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Image Generation</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="flux-dev">
+                                <div class="model-info">
+                                    <div class="model-name">FLUX.1-dev <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Production Grade. Maximum detail and adherence. Slow
+                                        generation.</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 54 GB</span>
+                                        <span class="meta-item">🧠 RAM: 32GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 12GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="flux-dev">Download</button>
+                                </div>
+                            </div>
+
+                            <div class="model-item" data-model-id="flux-schnell">
+                                <div class="model-info">
+                                    <div class="model-name">FLUX.1-schnell <span
+                                            class="quality-badge fast">[FAST]</span></div>
+                                    <div class="model-desc">Turbo Mode. 4-step generation for quick drafts. Lower
+                                        fidelity.</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 54 GB</span>
+                                        <span class="meta-item">🧠 RAM: 32GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 12GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="flux-schnell">Download</button>
+                                </div>
+                            </div>
+
+                            <div class="model-item" data-model-id="qwen-image">
+                                <div class="model-info">
+                                    <div class="model-name">Qwen-Image <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Text Specialist. The best model for rendering accurate text
+                                        inside images.</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 54 GB</span>
+                                        <span class="meta-item">🧠 RAM: 64GB+</span>
+                                        <span class="meta-item warning">⚡ VRAM: 24GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="qwen-image">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Music Generation -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Music Generation</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="musicgen-large">
+                                <div class="model-info">
+                                    <div class="model-name">MusicGen-Large <span
+                                            class="quality-badge best">[BEST]</span></div>
+                                    <div class="model-desc">Studio Quality. Complex musical structure and high fidelity.
+                                    </div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 19.1 GB</span>
+                                        <span class="meta-item">🧠 RAM: 16GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 8GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="musicgen-large">Download</button>
+                                </div>
+                            </div>
+
+                            <div class="model-item" data-model-id="musicgen-medium">
+                                <div class="model-info">
+                                    <div class="model-name">MusicGen-Medium <span
+                                            class="quality-badge balanced">[BALANCED]</span></div>
+                                    <div class="model-desc">Sketch Quality. Good for quick ideas, but less coherent.
+                                    </div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 11.2 GB</span>
+                                        <span class="meta-item">🧠 RAM: 8GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 6GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="musicgen-medium">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text-to-Speech -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Text-to-Speech</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="chatterbox-turbo">
+                                <div class="model-info">
+                                    <div class="model-name">Chatterbox Turbo <span
+                                            class="quality-badge best">[BEST]</span></div>
+                                    <div class="model-desc">Natural voice synthesis with emotion support</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 9.0 GB</span>
+                                        <span class="meta-item">🧠 RAM: 4GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 4GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="chatterbox-turbo">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Generation -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Video Generation</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="hunyuan-video">
+                                <div class="model-info">
+                                    <div class="model-name">HunyuanVideo <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Cinema Grade. The most powerful video model available
+                                        locally.</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 39.0 GB</span>
+                                        <span class="meta-item">🧠 RAM: 32GB+</span>
+                                        <span class="meta-item warning">⚡ VRAM: 60GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="hunyuan-video">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Generation -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>3D Generation</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="hunyuan3d">
+                                <div class="model-info">
+                                    <div class="model-name">Hunyuan3D 2.5 <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Convert images to 3D models</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 69.7 GB</span>
+                                        <span class="meta-item">🧠 RAM: 16GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 12GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="hunyuan3d">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Upscaling -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Image Upscaling</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="realesrgan">
+                                <div class="model-info">
+                                    <div class="model-name">RealESRGAN 4x <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Upscale images to 4K</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 60 MB</span>
+                                        <span class="meta-item">🧠 RAM: 4GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 4GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="realesrgan">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Background Removal -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Background Removal</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="u2net">
+                                <div class="model-info">
+                                    <div class="model-name">U2Net <span class="quality-badge best">[BEST]</span></div>
+                                    <div class="model-desc">Remove image backgrounds</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 180 MB</span>
+                                        <span class="meta-item">🧠 RAM: 4GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 2GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="u2net">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Audio Tools -->
+                    <div class="model-category">
+                        <div class="category-header">
+                            <h3>Audio Tools</h3>
+                        </div>
+                        <div class="model-list">
+                            <div class="model-item" data-model-id="bs-roformer">
+                                <div class="model-info">
+                                    <div class="model-name">BS-Roformer <span class="quality-badge best">[BEST]</span>
+                                    </div>
+                                    <div class="model-desc">Separate vocals from music</div>
+                                    <div class="model-meta">
+                                        <span class="meta-item">💾 Storage: 0.6 GB</span>
+                                        <span class="meta-item">🧠 RAM: 8GB+</span>
+                                        <span class="meta-item">⚡ VRAM: 4GB+</span>
+                                    </div>
+                                </div>
+                                <div class="model-actions">
+                                    <span class="model-status" data-status="not-downloaded">Not Downloaded</span>
+                                    <button class="btn-download" data-model="bs-roformer">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat View -->
+            <div class="view" id="chat-view" style="padding: 0; height: 100%; overflow: hidden;">
+                <div class="chat-layout">
+                    <!-- Main Chat Area -->
+                    <div class="chat-container">
+                        <div class="messages-container" id="chat-messages">
+                            <!-- Welcome/Empty State -->
+                            <div class="chat-header-controls"
+                                style="position: absolute; top: 10px; right: 20px; z-index: 9999; display: flex; gap: 10px;">
+
+                                <select class="model-selector" id="chat-model-selector" data-category="chat"
+                                    style="padding: 6px; border-radius: 6px; background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-subtle);">
+                                    <option value="">Select Chat Model...</option>
+                                </select>
+                            </div>
+                            <div class="empty-state" id="chat-empty-state">
+                                <div class="welcome-card">
+                                    <div class="welcome-header">
+                                        <div class="app-icon">V</div>
+                                        <h3>Hi! I'm V6rge, your AI assistant.</h3>
+                                    </div>
+                                    <p>I can help you with:</p>
+                                    <ul class="capabilities-list">
+                                        <li><span class="cap-icon">⚡</span> Control your computer (God Mode)</li>
+                                        <li><span class="cap-icon">🎬</span> Generate videos</li>
+                                        <li><span class="cap-icon">📦</span> Create 3D models</li>
+                                        <li><span class="cap-icon">🖼️</span> Generate images & art</li>
+                                        <li><span class="cap-icon">🎵</span> Create music & sound</li>
+                                        <li><span class="cap-icon">📄</span> Analyze files & documents</li>
+                                        <li><span class="cap-icon">💭</span> Answer any question</li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                            <!-- Messages will be injected here -->
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="chat-input-area">
+                            <div class="chat-input-wrapper">
+                                <textarea id="chat-input" class="chat-input" placeholder="Ask V6rge anything..."
+                                    rows="1"></textarea>
+                                <div class="input-bottom-row">
+                                    <div class="input-actions-left">
+                                        <button class="capsule-btn" id="btn-image-gen" data-action="generate-image">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                                <polyline points="21 15 16 10 5 21" />
+                                            </svg>
+                                            Image
+                                        </button>
+                                        <button class="capsule-btn" id="btn-music-gen" data-action="generate-music">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M9 18V5l12-2v13" />
+                                                <circle cx="6" cy="18" r="3" />
+                                                <circle cx="18" cy="16" r="3" />
+                                            </svg>
+                                            Music
+                                        </button>
+                                        <button class="capsule-btn" id="btn-tts" data-action="text-to-speech">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                            </svg>
+                                            TTS
+                                        </button>
+                                        <button class="capsule-btn" disabled style="opacity: 0.5; cursor: not-allowed;"
+                                            title="Coming Soon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z">
+                                                </path>
+                                                <polyline points="14 2 14 8 20 8"></polyline>
+                                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                <polyline points="10 9 9 9 8 9"></polyline>
+                                            </svg>
+                                            Summarize
+                                        </button>
+                                    </div>
+                                    <div class="input-actions-right">
+                                        <button class="icon-btn" id="attach-btn" title="Attach File">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path
+                                                    d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                                            </svg>
+                                        </button>
+                                        <button class="icon-btn send-btn" id="send-btn">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <line x1="22" y1="2" x2="11" y2="13" />
+                                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <!-- Image Generation View -->
+            <div class="view" id="image-gen-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Image Generation</h2>
+                        <select class="model-selector" id="image-model-select" data-category="image">
+                            <option value="" disabled selected>Select Model...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <!-- Prompt -->
+                        <div class="input-group">
+                            <label>Prompt</label>
+                            <textarea class="tool-textarea" id="image-prompt"
+                                placeholder="Describe the image you want to generate..." rows="3"></textarea>
+                        </div>
+
+                        <!-- Resolution Presets (for all models) -->
+                        <div class="input-group">
+                            <label>Resolution</label>
+                            <div class="resolution-presets" id="resolution-presets">
+                                <button class="preset-btn active" data-width="1024" data-height="1024">Square
+                                    (1:1)</button>
+                                <button class="preset-btn" data-width="1280" data-height="720">Landscape (16:9)</button>
+                                <button class="preset-btn" data-width="720" data-height="1280">Portrait (9:16)</button>
+                                <button class="preset-btn" data-width="1024" data-height="768">Photo (4:3)</button>
+                                <button class="preset-btn" data-width="768" data-height="1024">Portrait (3:4)</button>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button class="btn-primary" id="generate-image-btn">Generate Image</button>
+
+                        <!-- Advanced Settings (collapsible) -->
+                        <details class="advanced-settings" id="image-advanced-settings">
+                            <summary>Advanced Settings</summary>
+                            <div class="advanced-content">
+                                <!-- Common settings -->
+                                <div class="input-group">
+                                    <label>Steps</label>
+                                    <input type="range" id="image-steps" min="1" max="50" value="4">
+                                    <span id="image-steps-value">4</span>
+                                </div>
+                                <div class="input-group">
+                                    <label>Seed (0 = random)</label>
+                                    <input type="number" id="image-seed" value="0" min="0">
+                                </div>
+
+                                <!-- Qwen-specific options (hidden by default) -->
+                                <div id="qwen-advanced-options" style="display: none;">
+                                    <div class="input-group">
+                                        <label>Guidance Scale</label>
+                                        <input type="range" id="qwen-guidance" min="0" max="10" value="4" step="0.5">
+                                        <span id="qwen-guidance-value">4</span>
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Negative Prompt</label>
+                                        <textarea class="tool-textarea small" id="qwen-negative-prompt"
+                                            placeholder="What to avoid in the image..." rows="2"></textarea>
+                                    </div>
+                                    <div class="input-group checkbox-group">
+                                        <label>
+                                            <input type="checkbox" id="qwen-enhance" checked>
+                                            Prompt Enhance (adds quality suffix)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- Output -->
+                        <div class="output-area" id="image-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music Generation View -->
+            <div class="view" id="music-gen-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Music Generation</h2>
+                        <select class="model-selector" id="music-model-select" data-category="music">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label>Prompt</label>
+                            <textarea class="tool-textarea" id="music-prompt"
+                                placeholder="Describe the music you want to generate..." rows="3"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Duration (seconds)</label>
+                            <input type="number" id="music-duration" value="10" min="5" max="30" step="1">
+                        </div>
+                        <button class="btn-primary" id="generate-music-btn">Generate Music</button>
+                        <div class="output-area" id="music-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text to Speech View -->
+            <div class="view" id="tts-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Text to Speech</h2>
+                        <select class="model-selector" id="tts-model-select" data-category="tts">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label>Text</label>
+                            <textarea class="tool-textarea" id="tts-text"
+                                placeholder="Enter text to convert to speech..." rows="4"></textarea>
+                        </div>
+                        <div class="emotion-tags">
+                            <span class="tag-label">Emotion tags:</span>
+                            <button class="tag-btn" data-tag="[laugh]">[laugh]</button>
+                            <button class="tag-btn" data-tag="[chuckle]">[chuckle]</button>
+                            <button class="tag-btn" data-tag="[sigh]">[sigh]</button>
+                            <button class="tag-btn" data-tag="[gasp]">[gasp]</button>
+                            <button class="tag-btn" data-tag="[cough]">[cough]</button>
+                        </div>
+                        <button class="btn-primary" id="synthesize-btn">Synthesize Speech</button>
+                        <div class="output-area" id="tts-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D Generation View -->
+            <div class="view" id="3d-gen-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>3D Generation</h2>
+                        <select class="model-selector" id="3d-model-select" data-category="3d">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="file-upload-area" id="3d-drop-zone">
+                            <div class="upload-icon">🖼️</div>
+                            <p>Drop an image to convert to 3D</p>
+                            <input type="file" id="3d-file-input" accept="image/*" hidden>
+                        </div>
+                        <div class="input-group">
+                            <label>Output Format</label>
+                            <select id="3d-format" class="tool-select">
+                                <option value="glb" selected>GLB (Binary GLTF)</option>
+                                <option value="obj">OBJ</option>
+                                <option value="stl">STL</option>
+                            </select>
+                        </div>
+
+                        <details class="advanced-options">
+                            <summary>Advanced Options</summary>
+                            <div class="advanced-content">
+                                <div class="input-group">
+                                    <label>Inference Steps <span class="range-val" id="val-3d-steps">50</span></label>
+                                    <input type="range" id="3d-steps" min="30" max="100" value="50">
+                                </div>
+                                <div class="input-group">
+                                    <label>Texture Resolution</label>
+                                    <select id="3d-texture-res" class="tool-select">
+                                        <option value="512">512px</option>
+                                        <option value="1024" selected>1024px</option>
+                                        <option value="2048">2048px (Slow)</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Seed (0 = Random)</label>
+                                    <input type="number" class="tool-input" id="3d-seed" value="0" min="0">
+                                </div>
+                            </div>
+                        </details>
+
+                        <button class="btn-primary" id="generate-3d-btn" disabled>Generate 3D Model</button>
+                        <div class="output-area" id="3d-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Generation View -->
+            <div class="view" id="video-gen-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Video Generation</h2>
+                        <select class="model-selector" id="video-model-select" data-category="video">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="input-group">
+                            <label>Prompt</label>
+                            <textarea class="tool-textarea" id="video-prompt"
+                                placeholder="Describe the video you want to generate..." rows="3"></textarea>
+                        </div>
+
+                        <details class="advanced-options">
+                            <summary>Advanced Options</summary>
+                            <div class="advanced-content">
+                                <div class="input-group">
+                                    <label>Frames <span class="range-val" id="val-video-frames">65</span></label>
+                                    <input type="range" id="video-frames" min="16" max="129" step="1" value="65">
+                                </div>
+                                <div class="input-group">
+                                    <label>Inference Steps <span class="range-val"
+                                            id="val-video-steps">30</span></label>
+                                    <input type="range" id="video-steps" min="10" max="50" value="30">
+                                </div>
+                                <div class="input-group">
+                                    <label>FPS</label>
+                                    <select id="video-fps" class="tool-select">
+                                        <option value="16">16 FPS</option>
+                                        <option value="24" selected>24 FPS</option>
+                                        <option value="30">30 FPS</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
+
+                        <button class="btn-primary" id="generate-video-btn">Generate Video</button>
+                        <div class="output-area" id="video-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Upscaler View -->
+            <div class="view" id="upscale-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Image Upscaler</h2>
+                        <select class="model-selector" id="upscale-model-select" data-category="upscaler">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="file-upload-area" id="upscale-drop-zone">
+                            <div class="upload-icon">🖼️</div>
+                            <p>Drop an image here or click to browse</p>
+                            <input type="file" id="upscale-file-input" accept="image/*" hidden>
+                        </div>
+                        <div class="input-group">
+                            <label>Scale Factor</label>
+                            <select id="upscale-scale">
+                                <option value="2">2x</option>
+                                <option value="4" selected>4x</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" id="upscale-btn" disabled>Upscale Image</button>
+                        <div class="output-area" id="upscale-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background Remover View -->
+            <div class="view" id="bg-remove-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Background Removal</h2>
+                        <select class="model-selector" id="bg-model-select" data-category="bg_remover">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="file-upload-area" id="bg-drop-zone">
+                            <div class="upload-icon">🖼️</div>
+                            <p>Drop an image here or click to browse</p>
+                            <input type="file" id="bg-file-input" accept="image/*" hidden>
+                        </div>
+                        <button class="btn-primary" id="remove-bg-btn" disabled>Remove Background</button>
+                        <div class="output-area" id="bg-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocal Separator View -->
+            <div class="view" id="vocal-sep-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Vocal Separator</h2>
+                        <select class="model-selector" id="vocal-model-select" data-category="vocal_sep">
+                            <option value="" disabled selected>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="tool-content">
+                        <div class="file-upload-area" id="vocal-drop-zone">
+                            <div class="upload-icon">🎵</div>
+                            <p>Drop an audio file here or click to browse</p>
+                            <input type="file" id="vocal-file-input" accept="audio/*" hidden>
+                        </div>
+                        <button class="btn-primary" id="separate-btn" disabled>Separate Vocals</button>
+                        <div class="output-area" id="vocal-output"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div class="view" id="settings-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Settings</h2>
+                    </div>
+                    <div class="tool-content" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="settings-section">
+                            <h3>Backend Connection</h3>
+                            <p class="settings-desc">Configure your backend server. Use localhost for local, or an ngrok
+                                URL for cloud GPU.</p>
+                            <div class="input-group">
+                                <label>Backend URL</label>
+                                <input type="text" id="backend-url-input" placeholder="http://localhost:5000">
+                            </div>
+                            <div class="settings-buttons">
+                                <button class="btn-secondary" id="reset-backend-btn">Use Localhost</button>
+                                <button class="btn-secondary" id="test-connection-btn">Test Connection</button>
+                                <button class="btn-primary" id="save-backend-btn">Save & Apply</button>
+                            </div>
+                            <div class="connection-status" id="connection-status"></div>
+                        </div>
+
+
+                        <!-- Appearance Settings -->
+                        <div class="settings-section">
+                            <h3>Appearance</h3>
+                            <div class="setting-item"
+                                style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="setting-info">
+                                    <span class="setting-label" style="font-weight: 600; display: block;">Dark
+                                        Mode</span>
+                                    <span class="setting-desc"
+                                        style="font-size: 0.9em; color: var(--text-secondary);">Switch between light and
+                                        dark themes</span>
+                                </div>
+                                <label class="switch"
+                                    style="position: relative; display: inline-block; width: 40px; height: 20px;">
+                                    <input type="checkbox" id="dark-mode-toggle">
+                                    <span class="slider round"
+                                        style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 20px;"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Hotspot Mode (Cloudflare Tunnel)</h3>
+                            <div class="setting-item"
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div class="setting-info">
+                                    <span class="setting-label" style="font-weight: 600; display: block;">Enable
+                                        Hotspot</span>
+                                    <span class="setting-desc"
+                                        style="font-size: 0.9em; color: var(--text-secondary);">Create a secure public
+                                        link to access V6rge from anywhere</span>
+                                </div>
+                                <label class="switch"
+                                    style="position: relative; display: inline-block; width: 40px; height: 20px;">
+                                    <input type="checkbox" id="hotspot-toggle">
+                                    <span class="slider round"
+                                        style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 20px;"></span>
+                                </label>
+                            </div>
+
+                            <div
+                                style="padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle);">
+                                <button id="toggle-history-btn" class="btn-text"
+                                    style="font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                                    </svg>
+                                    History
+                                </button>
+                                <select class="model-selector" id="chat-model-selector" data-category="chat"
+                                    style="padding: 6px; border-radius: 6px; background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-subtle);">
+                                    <option value="">Select Chat Model...</option>
+                                </select>
+                            </div>
+                            <div id="hotspot-details"
+                                style="display: none; padding: 15px; background: var(--bg-secondary); border-radius: 8px; border: 1px solid var(--border-subtle);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-weight: 500; font-size: 0.9em;">Your Public URL:</span>
+                                    <button id="copy-hotspot-url" class="btn-secondary btn-sm"
+                                        style="padding: 2px 8px; font-size: 0.8em;">Copy</button>
+                                </div>
+                                <code id="hotspot-url-display"
+                                    style="display: block; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 4px; word-break: break-all; color: var(--accent-primary); font-family: monospace;">Starting tunnel...</code>
+                                <div
+                                    style="margin-top: 10px; font-size: 0.85em; color: var(--text-muted); display: flex; gap: 6px; align-items: start;">
+                                    <span>⚠️</span>
+                                    <span><strong style="color: var(--status-warning);">Warning:</strong> Anyone with
+                                        this link has full control over your PC's V6rge instance. Share with
+                                        caution.</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="settings-section">
+                            <h3>Model Storage</h3>
+                            <p class="settings-desc">Location where AI models are stored:</p>
+                            <div class="input-group storage-path-group">
+                                <input type="text" id="model-dir-input" class="tool-input" readonly
+                                    placeholder="C:\Users\username\.v6rge">
+                                <button class="icon-btn-small" id="select-model-dir-btn" title="Browse...">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="storage-status" id="storage-status"></span>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>GPU Configuration</h3>
+                            <div class="input-group">
+                                <label>GPU Name</label>
+                                <input type="text" id="gpu-name" placeholder="e.g., RTX 4090">
+                            </div>
+                            <div class="input-group">
+                                <label>VRAM (GB)</label>
+                                <input type="number" id="gpu-vram" placeholder="24">
+                            </div>
+                            <button class="btn-secondary" id="save-gpu-btn">Save GPU Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Feedback View -->
+            <div class="view" id="feedback-view">
+                <div class="tool-panel">
+                    <div class="tool-header">
+                        <h2>Provide Feedback</h2>
+                    </div>
+                    <div class="tool-content" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="input-group">
+                            <label>Feedback Type</label>
+                            <select id="feedback-type" class="tool-select">
+                                <option value="bug">Bug Report</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="general">General Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" id="feedback-email" class="tool-input" placeholder="your@email.com">
+                        </div>
+
+                        <div class="input-group">
+                            <label>Description</label>
+                            <textarea id="feedback-desc" class="tool-textarea" rows="6"
+                                placeholder="Enter your feedback here..."></textarea>
+                        </div>
+
+                        <button class="btn-secondary" id="submit-feedback-btn" style="width: 100px;">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Core Scripts -->
+    <!-- Core Scripts -->
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+/* ========================================
+   MODEL MANAGER DASHBOARD
+   ======================================== */
+
+.model-manager {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.manager-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.manager-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.storage-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.model-category {
+    margin-bottom: 32px;
+}
+
+.category-header {
+    margin-bottom: 12px;
+}
+
+.category-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.model-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.model-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.model-item:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-focus);
+}
+
+.model-info {
+    flex: 1;
+}
+
+.model-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quality-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+}
+
+.quality-badge.best {
+    background: #22c55e20;
+    color: #22c55e;
+}
+
+.quality-badge.balanced {
+    background: #f59e0b20;
+    color: #f59e0b;
+}
+
+.quality-badge.fast {
+    background: #6366f120;
+    color: #818cf8;
+}
+
+.model-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.model-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.model-meta .warning {
+    color: #f59e0b;
+}
+
+.model-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.model-status {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.model-status[data-status="not-downloaded"] {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+.model-status[data-status="ready"] {
+    background: #22c55e20;
+    color: #22c55e;
+}
+
+.model-status[data-status="downloading"] {
+    background: #f59e0b20;
+    color: #f59e0b;
+}
+
+.btn-download {
+    padding: 6px 16px;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-download:hover {
+    background: var(--accent-hover);
+}
+
+.btn-download:disabled {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.btn-delete {
+    padding: 6px 12px;
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid #ef444440;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: #ef444420;
+    border-color: #ef4444;
+}
+
+/* ========================================
+   VRAM COMPATIBILITY INDICATOR
+   ======================================== */
+.vram-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.vram-badge.compatible {
+    background: #22c55e15;
+    color: #22c55e;
+    border: 1px solid #22c55e30;
+}
+
+.vram-badge.warning {
+    background: #f59e0b15;
+    color: #f59e0b;
+    border: 1px solid #f59e0b30;
+}
+
+.vram-badge.incompatible {
+    background: #ef444415;
+    color: #ef4444;
+    border: 1px solid #ef444430;
+}
+
+.vram-badge svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ========================================
+   ENHANCED PROGRESS BAR
+   ======================================== */
+.progress-container {
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+}
+
+.progress-bar-bg {
+    height: 8px;
+    background: var(--bg-hover);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%);
+    animation: shimmerProgress 1.5s infinite;
+}
+
+@keyframes shimmerProgress {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.progress-info .p-msg {
+    flex: 1;
+}
+
+.progress-info .p-percent {
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.progress-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.progress-eta {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.progress-eta svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ========================================
+   RETRY BUTTON
+   ======================================== */
+.btn-retry {
+    padding: 6px 12px;
+    background: #f59e0b20;
+    color: #f59e0b;
+    border: 1px solid #f59e0b40;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-retry:hover {
+    background: #f59e0b30;
+    border-color: #f59e0b;
+}
+
+.btn-retry svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ========================================
+   MODEL CARD ENHANCEMENTS
+   ======================================== */
+.model-item.downloading {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.model-item.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+}
+
+.model-size-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.model-size-info .size-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.model-size-info svg {
+    width: 12px;
+    height: 12px;
+    opacity: 0.7;
+}
+
+/* Status indicator dot */
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.status-dot.ready {
+    background: #22c55e;
+    box-shadow: 0 0 4px #22c55e;
+}
+
+.status-dot.downloading {
+    background: #f59e0b;
+    animation: pulse 1.5s infinite;
+}
+
+.status-dot.error {
+    background: #ef4444;
+}
+
+.status-dot.not-downloaded {
+    background: var(--text-muted);
+    opacity: 0.5;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Custom dropdown styles removed - now handled globally in styles.css */
