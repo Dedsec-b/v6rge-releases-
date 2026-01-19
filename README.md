@@ -38,7 +38,7 @@
 ## 🚀 Installation
 
 ### For Users (Pre-built)
-1. Download the latest installer from [Releases](https://github.com/YourUsername/V6rge/releases).
+1. Download the latest installer from [Releases](https://github.com/Dedsec-b/v6rge-releases-/releases/tag/v0.1.5).
 2. Run the installer. The backend will extract on first launch.
 3. Download models from the Dashboard tab.
 
